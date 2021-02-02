@@ -1,6 +1,9 @@
 name: '🤖 Issue Assigner'
 description: 'Automatically assigns incoming issues to a maintainer.'
 inputs:
+  GITHUB_TOKEN:
+    description: The GitHub token with write access to issues.
+    required: true
   maintainers:
     description: The array of GitHub logins to assign to issues.
     required: true

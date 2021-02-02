@@ -25,7 +25,9 @@ module.exports = app => {
 
     if (maintainers && maintainers.length > 0) {
       const maintainerIndex = payload.issue.number % maintainers.length
-      await octokit.issues.addAssignees(context.issue({assignees: [maintainers[maintainerIndex]]}))
+      const maintainer = maintainers[maintainerIndex]
+      app.log.info('Determined the next maintainer is', maintainer)
+      await octokit.issues.addAssignees(context.issue({assignees: [maintainer]}))
     }
   })
 }
