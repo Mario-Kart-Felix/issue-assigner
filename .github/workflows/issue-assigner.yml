@@ -11,6 +11,4 @@ jobs:
       - uses: patrickhulce/issue-assigner@master
         with:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          maintainers:
-            - patrickhulce
-            - paulirish
+          maintainers: 'patrickhulce,paulirish'
