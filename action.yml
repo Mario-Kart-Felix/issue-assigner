@@ -1,5 +1,9 @@
 name: '🤖 Issue Assigner'
 description: 'Automatically assigns incoming issues to a maintainer.'
+inputs:
+  maintainers:
+    description: The array of GitHub logins to assign to issues.
+    required: true
 runs:
   using: 'node12'
   main: 'action.js'

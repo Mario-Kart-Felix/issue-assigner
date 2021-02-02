@@ -1,3 +1,12 @@
+async function getMaintainers(context) {
+  if (process.env.ISSUE_ASSIGNER__MAINTAINERS) {
+    return process.env.ISSUE_ASSIGNER__MAINTAINERS.split(',')
+  }
+
+  const {maintainers} = await context.config('issue-assigner.yml')
+  return maintainers
+}
+
 /**
  * This is the main entrypoint to your Probot app
  * @param {import('probot').Probot} app
@@ -10,7 +19,8 @@ module.exports = app => {
 
     if (payload.issue.assignees.length > 0) return
 
-    const {maintainers} = await context.config('issue-assigner.yml')
+    const maintainers = await getMaintainers()
+    app.log.info(`Using maintainer list: ${JSON.stringify(maintainers)}`)
 
     if (maintainers && maintainers.length > 0) {
       const maintainerIndex = payload.issue.number % maintainers.length
