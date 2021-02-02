@@ -1,25 +1,25 @@
 # issue-assigner
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Probot app to automatically assign issues to maintainers in a round-robin fashion.
+> A GitHub Action built with [Probot](https://github.com/probot/probot) that automatically assigns issues to maintainers in a round-robin fashion.
 
-## Setup
-
-```sh
-# Install dependencies
-npm install
-
-# Run the bot
-npm start
-```
-
-## Docker
+## Usage
 
 ```sh
-# 1. Build container
-docker build -t issue-assigner .
+name: 'Issue assigner'
 
-# 2. Start container
-docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> issue-assigner
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: patrickhulce/issue-assigner@v1
+        with:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          maintainers: 'michaelscott,jimhalpert,dwightschrute'
+
 ```
 
 ## Contributing
