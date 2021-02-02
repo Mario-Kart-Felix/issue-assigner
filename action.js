@@ -7,6 +7,7 @@ const app = require('./index')
 
 // Set the maintainers so Probot doesn't have to fetch them from a separate file.
 process.env.ISSUE_ASSIGNER__MAINTAINERS = core.getInput('maintainers') || ''
+process.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN || core.getInput('GITHUB_TOKEN') || ''
 
 // Adapt the Probot app for Actions
 // This also acts as the main entrypoint for the Action

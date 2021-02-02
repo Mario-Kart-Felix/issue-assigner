@@ -15,7 +15,8 @@ module.exports = app => {
   app.log.info('Yay, the app was loaded!')
 
   app.on('issues.opened', async context => {
-    const {payload, octokit} = context
+    const {payload} = context
+    const octokit = await app.auth({token: process.env.GITHUB_TOKEN})
 
     if (payload.issue.assignees.length > 0) return
 
