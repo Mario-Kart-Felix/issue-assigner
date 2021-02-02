@@ -2,20 +2,19 @@
  * This is the main entrypoint to your Probot app
  * @param {import('probot').Probot} app
  */
-module.exports = (app) => {
-  // Your code here
-  app.log.info("Yay, the app was loaded!");
+module.exports = app => {
+  app.log.info('Yay, the app was loaded!')
 
-  app.on("issues.opened", async (context) => {
-    const issueComment = context.issue({
-      body: "Thanks for opening this issue!",
-    });
-    return context.octokit.issues.createComment(issueComment);
-  });
+  app.on('issues.opened', async context => {
+    const {payload, octokit} = context
 
-  // For more information on building apps:
-  // https://probot.github.io/docs/
+    if (payload.issue.assignees.length > 0) return
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
-};
+    const {maintainers} = await context.config('issue-assigner.yml')
+
+    if (maintainers && maintainers.length > 0) {
+      const maintainerIndex = payload.issue.number % maintainers.length
+      await octokit.issues.addAssignees(context.issue({assignees: [maintainers[maintainerIndex]]}))
+    }
+  })
+}

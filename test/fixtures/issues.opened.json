@@ -3,13 +3,14 @@
   "issue": {
     "number": 1,
     "user": {
-      "login": "hiimbex"
-    }
+      "login": "patrickhulce"
+    },
+    "assignees": []
   },
   "repository": {
-    "name": "testing-things",
+    "name": "issue-assigner-test",
     "owner": {
-      "login": "hiimbex"
+      "login": "patrickhulce"
     }
   },
   "installation": {

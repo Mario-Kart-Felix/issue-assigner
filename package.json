@@ -9,7 +9,8 @@
   "keywords": [
     "probot",
     "github",
-    "probot-app"
+    "probot-app",
+    "issue-assigner"
   ],
   "scripts": {
     "start": "probot run ./index.js",
